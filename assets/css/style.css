@@ -1,0 +1,569 @@
+/* Reset básico - faz todos os elementos incluírem padding e border no cálculo da largura */
+* {
+  box-sizing: border-box;
+}
+
+/* Variáveis CSS - cores e valores reutilizáveis em todo o site */
+:root {
+  --bg: #1a1a1a;           /* Cor de fundo principal */
+  --surface: #2a2a2a;      /* Cor de fundo dos cards */
+  --text: #ffffff;         /* Cor do texto principal */
+  --muted: #cccccc;        /* Cor do texto secundário */
+  --primary: #007bff;      /* Cor primária (azul) */
+  --accent: #0056b3;       /* Cor de destaque (azul escuro) */
+  --radius: 8px;           /* Raio dos cantos arredondados */
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Sombra padrão */
+}
+
+/* Scroll suave entre seções */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Estilos base do site */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* Container responsivo - largura máxima de 1000px, 90% em telas menores */
+.container {
+  width: min(1000px, 90%);
+  margin: 0 auto;
+}
+
+/* ===== HEADER ===== */
+/* Cabeçalho fixo no topo da página */
+.site-header {
+  background: var(--surface);
+  border-bottom: 1px solid #333;
+  position: sticky;  /* Fica fixo quando rola a página */
+  top: 0;
+  z-index: 10;       /* Fica acima de outros elementos */
+}
+
+/* Barra de navegação com logo e menu */
+.site-header .header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 0;
+}
+
+/* Logo/brand - círculo com as iniciais */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius);
+  background: var(--primary);
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Menu de navegação horizontal */
+.nav {
+  display: flex;
+  gap: 20px;
+}
+
+/* Links do menu */
+.nav a {
+  color: var(--text);
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  transition: background 0.2s ease;
+}
+
+.nav a:hover {
+  background: #333;
+}
+
+/* ===== SEÇÃO HERO ===== */
+/* Seção principal de apresentação */
+.hero {
+  padding: 60px 0 40px;
+}
+
+/* Grid com foto à esquerda e texto à direita */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 20px;
+  align-items: center;
+}
+
+/* Container da foto de perfil */
+.hero-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: var(--radius);
+  background: var(--primary);
+  display: grid;
+  place-items: center;
+  color: white;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+/* Foto de perfil - recorta para caber no container */
+.hero-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Nome principal */
+.hero-copy h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+
+/* Tag com cargo e localização */
+.hero-copy .tag {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* Resumo profissional */
+.hero-copy .lead {
+  margin: 0 0 16px;
+  color: var(--muted);
+  max-width: 60ch;  /* Limita largura para melhor leitura */
+}
+
+/* Container dos botões de ação */
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  margin: 12px 0 6px;
+}
+
+/* Estilo base dos botões */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Botão principal (azul) */
+.btn.primary {
+  color: white;
+  background: var(--primary);
+}
+
+/* Botão secundário (transparente com borda) */
+.btn.ghost {
+  color: var(--text);
+  background: transparent;
+  border-color: #333;
+}
+
+/* Efeito hover - levanta o botão */
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+/* Links das redes sociais */
+.social {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  display: flex;
+  gap: 12px;
+}
+
+.social a {
+  color: var(--text);
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+.social a:hover {
+  opacity: 1;
+}
+
+/* ===== SEÇÕES GERAIS ===== */
+/* Padding padrão para todas as seções */
+.secao {
+  padding: 40px 0;
+}
+
+/* Títulos das seções */
+h2 {
+  font-size: 24px;
+  margin: 0 0 20px;
+  position: relative;
+}
+
+/* Linha decorativa abaixo do título */
+h2:after {
+  content: "";
+  display: block;
+  height: 2px;
+  width: 40px;
+  margin-top: 6px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+/* ===== CURRÍCULO ===== */
+/* Grid responsivo - 2 colunas no desktop, 1 no mobile */
+.cv-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+/* Cards do currículo */
+.cv-card {
+  background: var(--surface);
+  border: 1px solid #333;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  transition: transform 0.2s ease;
+}
+
+/* Efeito hover - levanta o card */
+.cv-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Título dos cards com ícone */
+.cv-title {
+  margin: 0 0 12px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Quadradinho colorido antes do título */
+.cv-title::before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  background: var(--primary);
+}
+
+/* Lista de itens do currículo */
+.cv-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+/* Cargo/função em destaque */
+.cv-role {
+  font-weight: 700;
+}
+
+/* Informações secundárias (empresa, período, local) */
+.cv-meta {
+  color: var(--muted);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+/* Badges com informações */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #333;
+  border: 1px solid #444;
+  font-size: 12px;
+}
+
+/* Pontinho separador entre badges */
+.dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--muted);
+}
+
+/* Descrição do cargo */
+.cv-desc {
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+
+/* Lista de habilidades em chips */
+.chips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chips li {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #333;
+  border: 1px solid #444;
+  font-size: 13px;
+}
+
+/* Tags menores para tecnologias */
+.tags {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tags li {
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #333;
+  border: 1px solid #444;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* ===== PROJETOS ===== */
+/* Galeria responsiva - se adapta ao número de projetos */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* Card de projeto */
+.project {
+  background: var(--surface);
+  border: 1px solid #333;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  min-height: 160px;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+/* Efeito hover - levanta o card */
+.project:hover {
+  transform: translateY(-2px);
+}
+
+/* Conteúdo do projeto */
+.project-body {
+  padding: 16px 16px 8px;
+}
+
+/* Título do projeto */
+.project h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+}
+
+/* Descrição do projeto */
+.project p {
+  margin: 0 0 10px;
+  color: var(--muted);
+}
+
+/* Link para o projeto */
+.project-link {
+  margin: 8px 16px 16px;
+  align-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: white;
+  background: var(--primary);
+  font-weight: 600;
+  font-size: 13px;
+  transition: background 0.2s ease;
+}
+
+.project-link:hover {
+  background: var(--accent);
+}
+
+/* ===== CONTATO ===== */
+/* Grid com informações à esquerda e formulário à direita */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+/* Informações de contato */
+.contact-info h3 {
+  margin: 0 0 10px;
+}
+
+.contact-info ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.contact-info a {
+  color: var(--text);
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+.contact-info a:hover {
+  opacity: 1;
+}
+
+/* Formulário em grid 2 colunas */
+.form-contato {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Campo do formulário */
+.form-contato .campo {
+  display: grid;
+  gap: 6px;
+}
+
+/* Label dos campos */
+.form-contato label {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* Inputs e textarea */
+.form-contato input,
+.form-contato textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  border: 1px solid #333;
+  background: var(--surface);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+/* Foco nos campos - muda cor da borda */
+.form-contato input:focus,
+.form-contato textarea:focus {
+  border-color: var(--primary);
+}
+
+/* Textarea ocupa toda a largura */
+.form-contato textarea {
+  grid-column: 1 / -1;
+}
+
+/* Campo que ocupa toda a largura */
+.campo-full {
+  grid-column: 1 / -1;
+}
+
+/* Botão de envio */
+.form-contato .btn {
+  grid-column: 1 / -1;
+  justify-self: start;
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  border: none;
+  font-weight: 600;
+  background: var(--primary);
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.form-contato .btn:hover {
+  background: var(--accent);
+}
+
+/* ===== FOOTER ===== */
+.site-footer {
+  border-top: 1px solid #333;
+  padding: 20px 0;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ===== RESPONSIVO ===== */
+/* Tablet - ajustes intermediários */
+@media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 80px 1fr;
+  }
+  
+  .cv-grid {
+    grid-template-columns: 1fr;  /* Currículo em 1 coluna */
+  }
+}
+
+/* Mobile - layout adaptado */
+@media (max-width: 720px) {
+  .nav {
+    gap: 10px;
+  }
+  
+  .hero {
+    padding: 40px 0 30px;
+  }
+  
+  .hero-grid {
+    grid-template-columns: 1fr;  /* Hero em coluna única */
+    gap: 16px;
+    text-align: center;
+  }
+  
+  .hero-avatar {
+    width: 80px;
+    height: 80px;
+    justify-self: center;
+  }
+  
+  .contact-grid {
+    grid-template-columns: 1fr;  /* Contato em coluna única */
+  }
+  
+  .form-contato {
+    grid-template-columns: 1fr;  /* Formulário em coluna única */
+  }
+}
